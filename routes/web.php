@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\userController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,29 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//route http://127.0.0.0 /task
+Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+
+Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+
+//url boleh sama tapi method kena berbeza
+Route::post('/tasks/create', [TaskController::class, 'store'])->name('tasks.store');
+
+//{} utk id
+Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show');
+
+Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+Route::post('/tasks/{task}/edit', [TaskController::class, 'update'])->name('tasks.update');
+Route::get('/tasks/{task}/delete', [TaskController::class, 'destroy'])->name('tasks.destroy');
+
+
+
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/users/create', [UserController::class, 'store'])->name('users.store');
+
+Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::post('/users/{user}/edit', [UserController::class, 'update'])->name('users.update');
+Route::get('/users/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
